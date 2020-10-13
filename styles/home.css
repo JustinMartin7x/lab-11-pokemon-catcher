@@ -12,6 +12,19 @@ img {
     height: 150px;
     width:150px
 }
+input {
+    display: none;
+}
+label {
+   
+}
+input[type="radio"]:checked + img {
+    border: solid 6px red;
+    border-radius: 15px;
+    box-shadow: 5px 10px black;
+}
+
+    
 body {
     background-color: yellow;
     width: 100%;
