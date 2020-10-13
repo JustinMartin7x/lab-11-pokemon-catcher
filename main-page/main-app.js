@@ -13,34 +13,78 @@ const catchButton = document.getElementById('button');
 let pokemonEncounters = 10;
 let pokemonCaught = [];
 const pokemonSeen = [];
-let loopArray = [];
+
 
 //generate new pokemon
+
 generatePokemon();
 
-catchButton.addEventListener('click', () => {
-    pokemonEncounters--;   
-    for (let i = 0; i < selection.length; i++) {
-        pokemonSeen.push(selection.value);
-        pokemonCaught.push(selection.value);
-    }
-    generatePokemon();
-
-});
-
-
 function generatePokemon() {
-    let loopArray = [];
-    for (let i = 0; i < selectionImages.length; i++) {
-        let newPokemon = randomEncounter(pokemonList);
-        loopArray.push(newPokemon.id);
-        console.log(loopArray);
-        const compare = findById(loopArray, newPokemon.id);
-        if (compare === false) {
-            selectionImages[i].src = newPokemon.url_image;
-            selection[i].value = newPokemon.id;
-        } else {
-            newPokemon = randomEncounter(pokemonList);
-        } 
+    if (pokemonEncounters === 0) {
+        alert('you have caught a lot of pokemon');   
     }
+    pokemonEncounters--;
+    
+    let pokemonOne = randomEncounter(pokemonList);
+    let pokemonTwo = randomEncounter(pokemonList);
+    while (pokemonTwo === pokemonOne) {
+        pokemonTwo = randomEncounter(pokemonList);
+    }
+    let pokemonThree = randomEncounter(pokemonList);
+    while (pokemonThree === pokemonTwo || pokemonThree === pokemonOne) {
+        pokemonThree = randomEncounter(pokemonList);
+    }
+    selection[0].value = pokemonOne.id;
+    selectionImages[0].src = pokemonOne.url_image;
+    selection[1].value = pokemonTwo.id;
+    selectionImages[1].src = pokemonTwo.url_image;
+    selection[2].value = pokemonTwo.id;
+    selectionImages[2].src = pokemonThree.url_image;
+    pokemonSeen.push(pokemonOne, pokemonTwo, pokemonThree);
 }
+
+for (let i = 0; i < selection.length; i++) {
+    selection[i].addEventListener('change', (e) => {
+        const caught = e.target.value;
+        pokemonCaught.push(caught);
+         generatePokemon();
+         console.log(pokemonCaught);
+         console.log(pokemonSeen);
+    });
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// generatePokemon();
+ 
+// catchButton.addEventListener('click', () => {
+//     pokemonEncounters--;   
+//     for (let i = 0; i < selection.length; i++) {
+//         const pokemonId = selection.id;
+//         pokemonSeen.push(pokemonId);    
+//     }
+//     pokemonCaught.push(selection.value);
+//     generatePokemon();
+// console.log(pokemonSeen);
+// });
+
+
+// function generatePokemon() {
+    
+//     for (let i = 0; i < selectionImages.length; i++) {
+//         let newPokemon = randomEncounter(pokemonList);
+//         selectionImages[i].src = newPokemon.url_image;
+//         selection[i].value = newPokemon.id;
+       
+//     }
+// }
