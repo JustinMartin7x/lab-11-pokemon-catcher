@@ -1,12 +1,13 @@
 //importing functions
-import { randomEncounter, findByName } from './utils.js';
+import { randomEncounter, findByName, setInLocalStorage } from './utils.js';
 import { pokemonList } from '../pokemon-data/poke-data.js';
-
+const CART = 'Cart';
 
 //Grabbing DOM elements
 const selection = document.querySelectorAll('input');
 const selectionImages = document.querySelectorAll('img');
-const catchButton = document.getElementById('button');
+const button = document.querySelector('button');
+
 
 
 //States
@@ -20,10 +21,16 @@ generatePokemon();
 
 for (let i = 0; i < selection.length; i++) {
     selection[i].addEventListener('click', (e) => {
+       
+        pokemonEncounters--; 
+       
         if (pokemonEncounters === 0) {
-            alert('you have caught a lot of pokemon');   
+            alert('you have caught a lot of pokemon');
+            button.style.display = 'block';
+            selectionImages.style.visibility = 'hidden';
+
         }
-        pokemonEncounters--;
+        
           
         for (let i = 0; i < selection.length; i++) {
             const radio = selection[i];
@@ -41,8 +48,8 @@ for (let i = 0; i < selection.length; i++) {
         }
         const capturePokemon = findByName(pokeCart, e.target.value);
         capturePokemon.captured++;
-        generatePokemon();
-        console.log(pokeCart);   
+        setInLocalStorage(CART, pokeCart);
+        generatePokemon();  
     });
 }
 
@@ -65,14 +72,6 @@ function generatePokemon() {
     selectionImages[2].src = pokemonThree.url_image;     
 }
 
-
-
-
-
-
-
-
-// generatePokemon();
  
 // catchButton.addEventListener('click', () => {
 //     pokemonEncounters--;   

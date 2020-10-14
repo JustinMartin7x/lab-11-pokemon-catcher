@@ -1,0 +1,22 @@
+html {
+    display: flex;
+    grid-template-columns: 10% 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+header {
+    height: 100px;
+    width: 500px;
+    text-align: center;
+    justify-content: center;
+
+}
+
+canvas {
+    width: 75%;
+    height: 500px;
+
+}

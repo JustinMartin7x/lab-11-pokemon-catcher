@@ -10,11 +10,17 @@ export function randomEncounter(someArray) {
 
 
 export function findByName(someArray, someId) {
-
     for (let i = 0; i < someArray.length; i++) {
         const item = someArray[i];
         if (item.pokemon === someId) {
-            return someArray[i];
+            return item;
         }
     }
+}
+
+export function setInLocalStorage(key, value) {
+    const stringyItem = JSON.stringify(value);
+    localStorage.setItem(key, stringyItem);
+    return value;
+
 }
