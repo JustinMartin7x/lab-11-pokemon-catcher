@@ -70,5 +70,5 @@ var mixedChart = new Chart(ctx, {
 const button = document.querySelector('button');
 button.addEventListener('click', () => {
     localStorage.clear;
-    location.href = '../main-page.index.html';
+    location.href = '../main-page/index.html';
 })

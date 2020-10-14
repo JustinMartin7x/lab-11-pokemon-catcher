@@ -71,7 +71,7 @@ section {
 
 }
 button {
-    /* display: none; */
+    display: none;
     height: 50px;
     width: 100px;
     border-radius: 125px;
