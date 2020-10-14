@@ -1,30 +1,60 @@
 //importing functions
-import { randomEncounter, findById } from './utils.js';
+import { randomEncounter, findByName, setInLocalStorage } from './utils.js';
 import { pokemonList } from '../pokemon-data/poke-data.js';
-
+const CART = 'Cart';
 
 //Grabbing DOM elements
 const selection = document.querySelectorAll('input');
 const selectionImages = document.querySelectorAll('img');
-const catchButton = document.getElementById('button');
+const button = document.querySelector('button');
+
 
 
 //States
 let pokemonEncounters = 10;
-let pokemonCaught = [];
-const pokemonSeen = [];
+let pokeCart = [];
 
 
 //generate new pokemon
 
 generatePokemon();
 
+for (let i = 0; i < selection.length; i++) {
+    selection[i].addEventListener('click', (e) => {
+       
+        pokemonEncounters--; 
+       
+        if (pokemonEncounters === 0) {
+            alert('you have caught a lot of pokemon');
+            button.style.display = 'block';
+            selectionImages.style.visibility = 'hidden';
+
+        }
+        
+          
+        for (let i = 0; i < selection.length; i++) {
+            const radio = selection[i];
+            let item = findByName(pokeCart, radio.value);
+            if (!item) {
+                item = {
+                    pokemon: selection[i].value,
+                    encountered: 1,
+                    captured: 0,
+                };
+                pokeCart.push(item); 
+            } else {
+                item.encountered++;
+            }
+        }
+        const capturePokemon = findByName(pokeCart, e.target.value);
+        capturePokemon.captured++;
+        setInLocalStorage(CART, pokeCart);
+        generatePokemon();  
+    });
+}
+
+
 function generatePokemon() {
-    if (pokemonEncounters === 0) {
-        alert('you have caught a lot of pokemon');   
-    }
-    pokemonEncounters--;
-    
     let pokemonOne = randomEncounter(pokemonList);
     let pokemonTwo = randomEncounter(pokemonList);
     while (pokemonTwo === pokemonOne) {
@@ -34,38 +64,14 @@ function generatePokemon() {
     while (pokemonThree === pokemonTwo || pokemonThree === pokemonOne) {
         pokemonThree = randomEncounter(pokemonList);
     }
-    selection[0].value = pokemonOne.id;
+    selection[0].value = pokemonOne.pokemon;
     selectionImages[0].src = pokemonOne.url_image;
-    selection[1].value = pokemonTwo.id;
+    selection[1].value = pokemonTwo.pokemon;
     selectionImages[1].src = pokemonTwo.url_image;
-    selection[2].value = pokemonTwo.id;
-    selectionImages[2].src = pokemonThree.url_image;
-    pokemonSeen.push(pokemonOne, pokemonTwo, pokemonThree);
+    selection[2].value = pokemonTwo.pokemon;
+    selectionImages[2].src = pokemonThree.url_image;     
 }
 
-for (let i = 0; i < selection.length; i++) {
-    selection[i].addEventListener('change', (e) => {
-        const caught = e.target.value;
-        pokemonCaught.push(caught);
-         generatePokemon();
-         console.log(pokemonCaught);
-         console.log(pokemonSeen);
-    });
-   
-}
-
-
-
-
-
-
-
-
-
-
-
-
-// generatePokemon();
  
 // catchButton.addEventListener('click', () => {
 //     pokemonEncounters--;   
@@ -79,8 +85,7 @@ for (let i = 0; i < selection.length; i++) {
 // });
 
 
-// function generatePokemon() {
-    
+// function generatePokemon() {   
 //     for (let i = 0; i < selectionImages.length; i++) {
 //         let newPokemon = randomEncounter(pokemonList);
 //         selectionImages[i].src = newPokemon.url_image;
