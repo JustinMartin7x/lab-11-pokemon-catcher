@@ -9,8 +9,8 @@ const encountered = parsedPokemon.map(pokemonSeen => pokemonSeen.encountered);
 const namePokemon = parsedPokemon.map(pokemonSeen => pokemonSeen.pokemon);
 console.log(captured, encountered);
 
-const data = [12, 19, 3, 5, 2, 3];
-const labelColors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
+
+const labelColors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange', 'crimson', 'rebecahpurple'];
 const colors = [
     'lavender',
     'rgba(54, 162, 235, 0.2)',
@@ -21,15 +21,20 @@ const colors = [
 ];
 const borders = [
     'orange',
-    'rgba(54, 162, 235, 1)',
-    'rgba(255, 206, 86, 1)',
-    'rgba(75, 192, 192, 1)',
-    'rgba(153, 102, 255, 1)',
-    'rgba(255, 159, 64, 1)'
+    'blue',
+    'purple',
+    'black',
+    'gray',
+    'red',
+    'lightblue',
+    'goldenrod',
+    'hotpink',
+    'khaki'
+
 ];
 
-new Chart(ctx, {
-    type: 'horizontalBar',
+var mixedChart = new Chart(ctx, {
+    type: 'bar',
     data: {
         // labels: labels,
         labels: namePokemon,
@@ -39,17 +44,31 @@ new Chart(ctx, {
             backgroundColor: colors,
             borderColor: borders,
             borderWidth: 5
-        }]
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+        },
+        {
+            label: namePokemon,
+            data: encountered,
+            type: 'bar',
+            backgroundColor: colors,
+            borderColor: borders,
+            borderWidth: 5,
+            // this dataset is drawn on top
+            order: 2,
+        }],
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
         }
     }
 });
 
-
+const button = document.querySelector('button');
+button.addEventListener('click', () => {
+    localStorage.clear;
+    location.href = '../main-page.index.html';
+})

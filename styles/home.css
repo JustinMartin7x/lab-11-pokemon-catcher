@@ -18,7 +18,8 @@ main {
     
 }
 header {
-    
+    font-family: Pokemon;
+    letter-spacing: .5em;
     height: 100px;
     width: 100%;
     border: solid 3px;
