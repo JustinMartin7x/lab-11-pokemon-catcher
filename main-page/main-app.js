@@ -27,8 +27,7 @@ for (let i = 0; i < selection.length; i++) {
         if (pokemonEncounters === 0) {
             alert('you have caught a lot of pokemon');
             button.style.display = 'block';
-            selectionImages.style.visibility = 'hidden';
-
+            location.href = '../results/index.html';
         }
         
           
