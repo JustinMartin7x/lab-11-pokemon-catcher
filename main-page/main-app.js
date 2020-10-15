@@ -7,8 +7,9 @@ const CART = 'Cart';
 const selection = document.querySelectorAll('input');
 const selectionImages = document.querySelectorAll('img');
 const button = document.querySelector('button');
-
-
+const pokeBanner = document.querySelectorAll('p');
+const pokemonEncountered = document.querySelectorAll('h1');
+const music = document.getElementById('audio');
 
 //States
 let pokemonEncounters = 10;
@@ -44,10 +45,13 @@ for (let i = 0; i < selection.length; i++) {
             } else {
                 item.encountered++;
             }
+            pokemonEncountered[i].textContent = `Encountered ${item.encountered} times`;
         }
+        
         const capturePokemon = findByName(pokeCart, e.target.value);
         capturePokemon.captured++;
         setInLocalStorage(CART, pokeCart);
+
         generatePokemon();  
     });
 }
@@ -63,14 +67,20 @@ function generatePokemon() {
     while (pokemonThree === pokemonTwo || pokemonThree === pokemonOne) {
         pokemonThree = randomEncounter(pokemonList);
     }
+    playAudio();
     selection[0].value = pokemonOne.pokemon;
     selectionImages[0].src = pokemonOne.url_image;
     selection[1].value = pokemonTwo.pokemon;
     selectionImages[1].src = pokemonTwo.url_image;
     selection[2].value = pokemonTwo.pokemon;
-    selectionImages[2].src = pokemonThree.url_image;     
+    selectionImages[2].src = pokemonThree.url_image;
+    pokeBanner[0].textContent = pokemonOne.pokemon;
+    pokeBanner[1].textContent = pokemonTwo.pokemon;
+    pokeBanner[2].textContent = pokemonThree.pokemon;
+}    
+function playAudio() {
+    music.play();
 }
-
  
 // catchButton.addEventListener('click', () => {
 //     pokemonEncounters--;   

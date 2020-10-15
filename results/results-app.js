@@ -2,8 +2,8 @@ var ctx = document.getElementById('myChart').getContext('2d');
 
 const caughtPokemon = localStorage.getItem('Cart');
 const parsedPokemon = JSON.parse(caughtPokemon);
-
-
+const music = document.getElementById('audio');
+playAudio();
 const captured = parsedPokemon.map(pokemonCaught => pokemonCaught.captured);
 const encountered = parsedPokemon.map(pokemonSeen => pokemonSeen.encountered);
 const namePokemon = parsedPokemon.map(pokemonSeen => pokemonSeen.pokemon);
@@ -71,4 +71,8 @@ const button = document.querySelector('button');
 button.addEventListener('click', () => {
     localStorage.clear;
     location.href = '../main-page/index.html';
-})
+});
+
+function playAudio() {
+    music.play();
+}
