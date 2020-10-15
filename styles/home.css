@@ -30,6 +30,10 @@ header {
     margin-bottom: 5em;
     text-align: center;
 }
+.banner {
+    font-family: pokemon;
+    letter-spacing: .5em;
+}
 img {
     height: 150px;
     width:150px;
@@ -78,4 +82,13 @@ button {
     box-shadow: black 3px 5px;
     background-color: #FF0000;
     
+}
+.encountered {
+    font-size: .5em;
+    font-family: pokemon;
+    letter-spacing: .5em;
+}
+.my_audio {
+    display: none;
+
 }
