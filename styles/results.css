@@ -36,3 +36,7 @@ canvas {
     height: 500px;
 
 }
+.my_audio {
+    display: none;
+
+}
